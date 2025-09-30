@@ -7,6 +7,7 @@ Simple Todo application built with Vue 3, Composition API, and Single File Compo
 - ✅ Add / remove / toggle todos
 - ✅ Edit todo items
 - ✅ Filter todos (All / Active / Completed)
+- ✅ Search todos
 - ✅ Persist in `localStorage`
 - ✅ Clean and responsive UI
 
