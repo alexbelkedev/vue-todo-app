@@ -14,6 +14,7 @@
         :todo="todo"
         @toggle="toggleTodo"
         @remove="removeTodo"
+        @update="updateTodo"
       />
     </ul>
   </main>
@@ -45,6 +46,13 @@ function toggleTodo(id) {
 
 function removeTodo(id) {
   todos.value = todos.value.filter((t) => t.id !== id);
+}
+
+function updateTodo({ id, text }) {
+  const todo = todos.value.find((t) => t.id === id);
+  if (todo) {
+    todo.text = text;
+  }
 }
 
 onMounted(() => {
