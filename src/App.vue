@@ -7,9 +7,26 @@
       <button>Add</button>
     </form>
 
+    <div class="filters">
+      <button :class="{ active: filter === 'all' }" @click="filter = 'all'">
+        All
+      </button>
+      <button
+        :class="{ active: filter === 'active' }"
+        @click="filter = 'active'"
+      >
+        Active
+      </button>
+      <button
+        :class="{ active: filter === 'completed' }"
+        @click="filter = 'completed'"
+      >
+        Completed
+      </button>
+    </div>
     <ul>
       <TodoItem
-        v-for="todo in todos"
+        v-for="todo in filteredTodos"
         :key="todo.id"
         :todo="todo"
         @toggle="toggleTodo"
@@ -21,11 +38,22 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import TodoItem from "./components/TodoItem.vue";
 
 const newTodo = ref("");
 const todos = ref([]);
+const filter = ref("all"); // 'all' | 'active' | 'completed'
+
+const filteredTodos = computed(() => {
+  if (filter.value === "active") {
+    return todos.value.filter((t) => !t.done);
+  } else if (filter.value === "completed") {
+    return todos.value.filter((t) => t.done);
+  } else {
+    return todos.value;
+  }
+});
 
 function addTodo() {
   if (newTodo.value.trim() === "") return;
@@ -92,5 +120,21 @@ ul {
   list-style: none;
   padding: 0;
   text-align: left;
+}
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.filters button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+}
+.filters button.active {
+  background: #3f51b5;
+  color: white;
 }
 </style>
