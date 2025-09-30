@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import TodoItem from "./components/TodoItem.vue";
 
 const newTodo = ref("");
@@ -46,6 +46,25 @@ function toggleTodo(id) {
 function removeTodo(id) {
   todos.value = todos.value.filter((t) => t.id !== id);
 }
+
+onMounted(() => {
+  const saved = localStorage.getItem("todos");
+  if (saved) {
+    try {
+      todos.value = JSON.parse(saved);
+    } catch (e) {
+      console.error("Failed to parse todos from localStorage");
+    }
+  }
+});
+
+watch(
+  todos,
+  (newTodos) => {
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+  },
+  { deep: true }
+);
 </script>
 
 <style scoped>
@@ -64,5 +83,6 @@ button {
 ul {
   list-style: none;
   padding: 0;
+  text-align: left;
 }
 </style>
