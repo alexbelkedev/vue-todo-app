@@ -10,13 +10,11 @@ Simple Todo application built with Vue 3, Composition API, and Single File Compo
 
 ## Project setup
 
-````bash
+```bash
 npm install
 npm run dev
+```
 
-Then commit and push:
-```bash
-git add README.md
-git commit -m "Add README"
-git push
-````
+## Live Demo
+
+Coming soon...
