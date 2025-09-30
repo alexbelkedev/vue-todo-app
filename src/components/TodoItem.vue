@@ -10,8 +10,8 @@
         <span :class="{ done: todo.done }">{{ todo.text }}</span>
       </label>
       <div class="actions">
-        <button @click="startEdit">✏️</button>
-        <button @click="$emit('remove', todo.id)">🗑️</button>
+        <button data-test="edit" @click="startEdit">✏️</button>
+        <button data-test="remove" @click="$emit('remove', todo.id)">🗑️</button>
       </div>
     </div>
 
