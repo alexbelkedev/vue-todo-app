@@ -20,6 +20,7 @@
         v-model="editText"
         @keyup.enter="saveEdit"
         @keyup.esc="cancelEdit"
+        data-test="edit-input"
       />
       <button @click="saveEdit">✅</button>
       <button @click="cancelEdit">❌</button>

@@ -32,4 +32,24 @@ describe('TodoItem.vue', () => {
     await deleteButton.trigger('click')
     expect(wrapper.emitted().remove).toBeTruthy()
   })
+
+  it('edits the selected todo', async () => {
+  const wrapper = mount(TodoItem, {
+    props: { todo: sampleTodo }
+  })
+
+  const editButton = wrapper.find('[data-test="edit"]')
+  await editButton.trigger('click')
+
+  const editInput = wrapper.find('[data-test="edit-input"]')
+  expect(editInput.exists()).toBeTruthy()
+  expect(editInput.element.value).toBe(sampleTodo.text)
+
+  await editInput.setValue('Updated Todo')
+  await editInput.trigger('keyup.enter')
+
+  const updateEvents = wrapper.emitted().update
+  expect(updateEvents).toBeTruthy()
+  expect(updateEvents[0][0]).toEqual({ id: sampleTodo.id, text: 'Updated Todo' })
+})
 })
