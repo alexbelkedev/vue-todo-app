@@ -4,7 +4,7 @@ Simple Todo application built with Vue 3, Composition API, and Single File Compo
 
 ## 🔗 Live Demo
 
-👉 [View it on GitHub Pages](https://alexbelke.github.io/vue-todo-app/)
+👉 [View it on GitHub Pages](https://alexbelkedev.github.io/vue-todo-app/)
 
 ## Features
 
