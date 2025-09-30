@@ -2,6 +2,10 @@
 
 Simple Todo application built with Vue 3, Composition API, and Single File Components.
 
+## 🔗 Live Demo
+
+👉 [View it on GitHub Pages](https://alexbelke.github.io/vue-todo-app/)
+
 ## Features
 
 - ✅ Add / remove / toggle todos
@@ -17,7 +21,3 @@ Simple Todo application built with Vue 3, Composition API, and Single File Compo
 npm install
 npm run dev
 ```
-
-## Live Demo
-
-See live demo on https://alexbelkedev.github.io/vue-todo-app/
