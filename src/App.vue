@@ -1,30 +1,68 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <main class="app">
+    <h1>Todo App</h1>
+
+    <form @submit.prevent="addTodo">
+      <input v-model="newTodo" placeholder="Add new todo" />
+      <button>Add</button>
+    </form>
+
+    <ul>
+      <TodoItem
+        v-for="todo in todos"
+        :key="todo.id"
+        :todo="todo"
+        @toggle="toggleTodo"
+        @remove="removeTodo"
+      />
+    </ul>
+  </main>
 </template>
 
+<script setup>
+import { ref } from "vue";
+import TodoItem from "./components/TodoItem.vue";
+
+const newTodo = ref("");
+const todos = ref([]);
+
+function addTodo() {
+  if (newTodo.value.trim() === "") return;
+
+  todos.value.push({
+    id: Date.now(),
+    text: newTodo.value,
+    done: false,
+  });
+
+  newTodo.value = "";
+}
+
+function toggleTodo(id) {
+  const todo = todos.value.find((t) => t.id === id);
+  if (todo) todo.done = !todo.done;
+}
+
+function removeTodo(id) {
+  todos.value = todos.value.filter((t) => t.id !== id);
+}
+</script>
+
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.app {
+  max-width: 500px;
+  margin: 2rem auto;
+  font-family: sans-serif;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+input {
+  padding: 0.5rem;
+  width: 70%;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+button {
+  padding: 0.5rem;
+}
+ul {
+  list-style: none;
+  padding: 0;
 }
 </style>
