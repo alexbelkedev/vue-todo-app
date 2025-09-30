@@ -9,7 +9,11 @@
     />
 
     <form @submit.prevent="addTodo">
-      <input v-model="newTodo" placeholder="Add new todo" />
+      <input
+        v-model="newTodo"
+        placeholder="Add new todo"
+        data-test="todo-input"
+      />
       <button>Add</button>
     </form>
 
