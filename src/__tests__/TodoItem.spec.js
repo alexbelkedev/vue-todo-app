@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import TodoItem from '../TodoItem.vue'
+import TodoItem from '../components/TodoItem.vue'
 
 const sampleTodo = {
   id: 1,

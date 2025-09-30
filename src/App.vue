@@ -46,26 +46,14 @@
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
 import TodoItem from "./components/TodoItem.vue";
+import { useFilteredTodos } from "./composables/useFilteredTodos";
 
 const newTodo = ref("");
 const todos = ref([]);
 const filter = ref("all"); // 'all' | 'active' | 'completed'
 const searchQuery = ref("");
 
-const filteredTodos = computed(() => {
-  const query = searchQuery.value.toLowerCase();
-  console.log("query", query);
-
-  return todos.value
-    .filter((todo) => {
-      if (filter.value === "active") return !todo.done;
-      if (filter.value === "completed") return todo.done;
-      return true;
-    })
-    .filter((todo) => {
-      return todo.text.toLowerCase().includes(query);
-    });
-});
+const filteredTodos = useFilteredTodos(todos, filter, searchQuery);
 
 function addTodo() {
   if (newTodo.value.trim() === "") return;
