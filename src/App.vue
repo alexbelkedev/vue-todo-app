@@ -1,6 +1,12 @@
 <template>
   <main class="app">
     <h1>Todo App</h1>
+    <input
+      type="text"
+      v-model="searchQuery"
+      placeholder="Search todos..."
+      class="search"
+    />
 
     <form @submit.prevent="addTodo">
       <input v-model="newTodo" placeholder="Add new todo" />
@@ -44,15 +50,21 @@ import TodoItem from "./components/TodoItem.vue";
 const newTodo = ref("");
 const todos = ref([]);
 const filter = ref("all"); // 'all' | 'active' | 'completed'
+const searchQuery = ref("");
 
 const filteredTodos = computed(() => {
-  if (filter.value === "active") {
-    return todos.value.filter((t) => !t.done);
-  } else if (filter.value === "completed") {
-    return todos.value.filter((t) => t.done);
-  } else {
-    return todos.value;
-  }
+  const query = searchQuery.value.toLowerCase();
+  console.log("query", query);
+
+  return todos.value
+    .filter((todo) => {
+      if (filter.value === "active") return !todo.done;
+      if (filter.value === "completed") return todo.done;
+      return true;
+    })
+    .filter((todo) => {
+      return todo.text.toLowerCase().includes(query);
+    });
 });
 
 function addTodo() {
@@ -136,5 +148,11 @@ ul {
 .filters button.active {
   background: #3f51b5;
   color: white;
+}
+.search {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  font-size: 1rem;
 }
 </style>
