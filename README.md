@@ -20,4 +20,4 @@ npm run dev
 
 ## Live Demo
 
-Coming soon...
+See live demo on https://alexbelkedev.github.io/vue-todo-app/
