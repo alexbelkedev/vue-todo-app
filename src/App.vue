@@ -2,23 +2,26 @@
   <main class="app">
     <h1>Todo App</h1>
     <input
-      type="text"
       v-model="searchQuery"
+      type="text"
       placeholder="Search todos..."
       class="search"
-    />
+    >
 
     <form @submit.prevent="addTodo">
       <input
         v-model="newTodo"
         placeholder="Add new todo"
         data-test="todo-input"
-      />
+      >
       <button>Add</button>
     </form>
 
     <div class="filters">
-      <button :class="{ active: filter === 'all' }" @click="filter = 'all'">
+      <button
+        :class="{ active: filter === 'all' }"
+        @click="filter = 'all'"
+      >
         All
       </button>
       <button
@@ -48,7 +51,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import TodoItem from "./components/TodoItem.vue";
 import { useFilteredTodos } from "./composables/useFilteredTodos";
 

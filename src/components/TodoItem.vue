@@ -1,29 +1,49 @@
 <template>
   <li>
-    <div v-if="!isEditing" class="view">
+    <div
+      v-if="!isEditing"
+      class="view"
+    >
       <label>
         <input
           type="checkbox"
           :checked="todo.done"
           @change="$emit('toggle', todo.id)"
-        />
+        >
         <span :class="{ done: todo.done }">{{ todo.text }}</span>
       </label>
       <div class="actions">
-        <button data-test="edit" @click="startEdit">✏️</button>
-        <button data-test="remove" @click="$emit('remove', todo.id)">🗑️</button>
+        <button
+          data-test="edit"
+          @click="startEdit"
+        >
+          ✏️
+        </button>
+        <button
+          data-test="remove"
+          @click="$emit('remove', todo.id)"
+        >
+          🗑️
+        </button>
       </div>
     </div>
 
-    <div v-else class="edit">
+    <div
+      v-else
+      class="edit"
+    >
       <input
         v-model="editText"
+        data-test="edit-input"
         @keyup.enter="saveEdit"
         @keyup.esc="cancelEdit"
-        data-test="edit-input"
-      />
-      <button @click="saveEdit">✅</button>
-      <button @click="cancelEdit">❌</button>
+      >
+      <button @click="saveEdit">
+        ✅
+      </button>
+      <button @click="cancelEdit">
+        ❌
+      </button>
     </div>
   </li>
 </template>
@@ -31,7 +51,12 @@
 <script setup>
 import { ref } from "vue";
 
-const props = defineProps(["todo"]);
+const props = defineProps({
+  todo: {
+    type: Object,
+    required: true,
+  },
+});
 const emit = defineEmits(["toggle", "remove", "update"]);
 
 const isEditing = ref(false);
